@@ -7,6 +7,7 @@ $lightGrey: #e6e6e6;
 $darkGrey: #333;
 $red: #ff1755;
 $yellow: #f89f1b;
+$light-bg: #4caf50;
 /*
   Fonts: google open sans
 
@@ -23,6 +24,11 @@ $yellow: #f89f1b;
 	-moz-transform: translateY($e);
 	transform: translateY($e);
 }
+@mixin translate($x, $y){
+	-webkit-transform: translate($x, $y);
+	-moz-transform: translate($x, $y);
+	transform: translate($x, $y);
+}
 @mixin transition($e){
 	-webkit-transition: $e;
 	-moz-transition: $e;
@@ -37,10 +43,14 @@ $yellow: #f89f1b;
 
 body {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 18px;
+	font-size: 16px;
 	color: $black;
 	font-weight: 400;
 	font-style: normal;
+}
+
+ul, li {
+	list-style: none;
 }
 
 a {
@@ -53,6 +63,17 @@ a {
    	text-decoration: none;
    	color: $yellow;
    }
+}
+
+.container{
+	width: 90%;
+	margin: auto;
+}
+
+.center-parent{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 

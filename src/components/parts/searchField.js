@@ -4,11 +4,12 @@ class SearchField extends Component {
 
   render() {
     return (
-      <div className="search">
+      <div className="search center-parent">
         <input
-        type="text"
-        placeholder="search for any location..."
-        onChange={(e) => this.props.handleQuery(e)}/>
+            className="child"
+            type="text"
+            placeholder="search for any location..."
+            onChange={(e) => this.props.handleQuery(e)}/>
       </div>
     );
   }

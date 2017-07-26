@@ -6,7 +6,6 @@ import Header from './components/parts/header';
 import Homepage from './components/pages/homepage';
 import MapPage from './components/pages/mappage';
 
-
 //includes
 import './Assets/css/style.min.css';
 
@@ -16,9 +15,11 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Header />
-            <Route exact path='/' component={MapPage} />
-            <Route exact path='/intro' component={Homepage}/>
+            <Header />
+            <div className="container">
+                <Route exact path='/' component={MapPage} />
+                <Route exact path='/intro' component={Homepage}/>
+            </div>
         </div>
       </Router>
     );
