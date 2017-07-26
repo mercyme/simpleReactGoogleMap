@@ -1,0 +1,60 @@
+/*
+  Vars
+*/
+$black: #010000;
+$white: #ffffff;
+$lightGrey: #e6e6e6;
+$darkGrey: #333;
+$red: #ff1755;
+$yellow: #f89f1b;
+/*
+  Fonts: google open sans
+
+  light 300
+  regular 400
+  bold 700
+*/
+/* 
+  Mixins
+*/
+
+@mixin translateY($e){
+	-webkit-transform: translateY($e);
+	-moz-transform: translateY($e);
+	transform: translateY($e);
+}
+@mixin transition($e){
+	-webkit-transition: $e;
+	-moz-transition: $e;
+	transition: $e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+	color: $black;
+	font-weight: 400;
+	font-style: normal;
+}
+
+a {
+   text-decoration: none;
+   color: $white;
+   @include transition(.4s ease-in-out);
+   cursor: pointer;
+
+   &:hover{
+   	text-decoration: none;
+   	color: $yellow;
+   }
+}
+
+
+
+
