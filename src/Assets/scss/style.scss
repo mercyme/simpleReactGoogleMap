@@ -1,5 +1,12 @@
 @import 'base';
 
+.highlight{
+  color: $red;
+  font-weight: bold;
+}
+.margin-horizontal{
+  margin: 10px 0;
+}
 header {
     position: relative;
 	display: block;
@@ -27,6 +34,7 @@ header {
 	  }
 	}
 }
+
 .search {
   width: 100%;
   height: 150px;
@@ -37,9 +45,11 @@ header {
     font-size: 16px;
   }
 }
+
 .title{
   color: $red;
 }
+
 .map{
   width: 80%;
   margin:auto;
@@ -58,11 +68,32 @@ header {
   overflow: hidden;
   margin: 20px 0 0 0;
   .location {
-    position: relative;
     width: 80%;
     margin-bottom: 20px;
     border: 1px solid $lightGrey;
 
+  }
+  .location-title, .location-info, .location-footer {
+    padding: 10px;
+  }
+  .location-info, .location-footer {
+    border-top: 1px solid $lightGrey;
+  }
+  .location-title {
+    position: relative;
+    background: $lightGrey;
+    padding: 10px;
+    img {
+      height: 30px;
+      float: right;
+    }
+    img, span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    span {
+      font-size: 18px;
+    }
     .overlay {
       position: absolute;
       width: 100%;
@@ -90,25 +121,41 @@ header {
       }
     }
   }
-  .location-title, .location-info, .location-footer {
-    padding: 10px;
-  }
-  .location-info, .location-footer {
-    border-top: 1px solid $lightGrey;
-  }
-  .location-title {
-    background: $lightGrey;
-    padding: 10px;
-    img {
-      height: 40px;
-    }
-    img, span {
+
+  .location-footer{
+    p{
       display: inline-block;
-      vertical-align: middle;
     }
     span {
-      font-size: 18px;
-      margin-left: 10px;
+      position: relative;
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      text-align: center;
+      margin: 0 10px;
+      background: $yellow;
+      color: white;
+      border-radius: 10px;
+
+      .type{
+        display: none;
+      }
+
+      &:hover{
+        .type{
+          display: block;
+          position: absolute;
+          width: auto;
+          text-align: center;
+          top: -28px;
+          left: -20px;
+          background: rgba(0,0,0,.7);
+          padding: 5px;
+          color: white;
+          font-size: 12px;
+          white-space: nowrap;
+        }
+      }
     }
   }
 }

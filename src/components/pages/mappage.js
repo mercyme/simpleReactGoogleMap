@@ -4,10 +4,8 @@ import LocationContainer from '../parts/locationContainer';
 
 let GoogleMap = window.google;
 let map, service, request, myLatLng, infoWindow, markers;
+let zenefits = new GoogleMap.maps.LatLng(37.785341, -122.395377);
 let boston = new GoogleMap.maps.LatLng(42.361145, -71.057083);
-const infoWindowTemplate = '<div id="info" >'+
-                    'infowindow'+
-                    '</div>';
 
 class MapPage extends Component {
   constructor(props){
@@ -15,8 +13,57 @@ class MapPage extends Component {
     this.state = {
       query : null,
       markers: [],
-      locations: []
+      locations: [],
+      index: 0
     };
+  }
+  componentDidMount(){
+        myLatLng = boston;
+        const mapOptions = {
+            zoom: 15,
+            center: myLatLng,
+            mapTypeId: GoogleMap.maps.MapTypeId.ROADMAP
+        };
+        map = new GoogleMap.maps.Map(this.refs.map, mapOptions);
+        infoWindow = new GoogleMap.maps.InfoWindow();
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+      return nextState.center !== this.state.center;
+  }
+  componentDidUpdate(){
+      let center = this.state.center ? this.state.center.geometry.location : zenefits;
+      let locations = this.state.locations;
+      map.setCenter(new GoogleMap.maps.LatLng(center.lat(),center.lng()));
+      for(let i = 0;i <locations.length; i++){
+          this.createMarker(locations[i]);
+      }
+  }
+
+  getLocations = (e) => {
+      this.clearMarkers();
+      let query = e.target.value;
+        if(query.length){
+            request = {
+                location: myLatLng,
+                radius: '500',
+                query: query
+            };
+            service = new GoogleMap.maps.places.PlacesService(map);
+            service.textSearch(request, (results, status)=>{
+                if(status === GoogleMap.maps.places.PlacesServiceStatus.OK){
+                    this.setState({center: results[0], locations: results, query: query});
+                    GoogleMap.maps.event.trigger(markers[this.state.index], 'click');
+                }
+            });
+        } else {
+            this.setState({center: null, locations: [], query: null});
+        }
+    }
+
+  focuslocation = (loc, index) => {
+      this.setState({center: loc, index: index});
+      console.log(loc);
   }
 
   createMarker = (place) =>{
@@ -26,35 +73,16 @@ class MapPage extends Component {
         title: place.name,
         map: map
       });
-      GoogleMap.maps.event.addListener(marker, 'click', function() {
-        infoWindow.open(map, marker);
-      });
+      // GoogleMap.maps.event.addListener(marker, 'click', function() {
+      //   infoWindow.close();
+      //   infoWindow = new GoogleMap.maps.InfoWindow();
+      //   infoWindow.setContent('<div><strong>' + marker.title + '</strong><br>' +
+      //          '</div>');
+      //   infoWindow.open(map, this);
+      // });
       markers.push(marker);
   }
 
-  getLocations = (e) => {
-      this.clearMarkers();
-      let query = e.target.value;
-      this.setState({query: e.target.value});
-      if(query.length >= 1){
-          request = {
-              location: myLatLng,
-              radius: '500',
-              query: query
-          };
-          service = new GoogleMap.maps.places.PlacesService(map);
-          service.textSearch(request, (results, status)=>{
-              if(status === GoogleMap.maps.places.PlacesServiceStatus.OK){
-                  this.setState({locations: results});
-                  for(let i = 0;i <results.length; i++){
-                      this.createMarker(results[i]);
-                  }
-                  this.setState({markers: markers});
-                  map.setCenter(results[0].geometry.location);
-              }
-          });
-      }
-  }
   clearMarkers = () => {
     markers = this.state.markers;
     for(let j = 0;j < markers.length;j++){
@@ -62,32 +90,13 @@ class MapPage extends Component {
     }
   }
 
-  focuslocation = (loc) => {
-     map.setCenter(loc.geometry.location);
-  }
-
-  componentDidMount(){
-    myLatLng = boston;
-    const mapOptions = {
-  		zoom: 15,
-  		center: myLatLng,
-  		mapTypeId: GoogleMap.maps.MapTypeId.ROADMAP
-  	};
-    map = new GoogleMap.maps.Map(this.refs.map, mapOptions);
-    infoWindow = new GoogleMap.maps.InfoWindow({
-        content: infoWindowTemplate
-    });
-  }
-
   render() {
     return (
       <div className="container">
         <SearchField handleQuery={this.getLocations}/>
-        <div className={`map ${this.state.query ? 'smaller': ''}`}>
-          <div ref="map" style={{ width: '100%', height: '100%', border: '1px solid grey'}}></div>
-        </div>
-          {this.state.query ? (
-              <LocationContainer locations={this.state.locations} focusLocation={this.focuslocation} query={this.state.query}/>
+        <div ref="map" className={`map ${this.state.query ? 'smaller': ''}`}></div>
+          {this.state.center ? (
+              <LocationContainer locations={this.state.locations} focusLocation={this.focuslocation} query={this.state.query} currentIndex={this.state.index}/>
           ) : (null)}
       </div>
     );
