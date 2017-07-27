@@ -8,7 +8,7 @@ class Location extends Component {
             <li className="location" onClick={() => this.props.focusLocation(location, this.props.index)}>
                 <div>
                     <div className="location-title">
-                        <span>{this.props.index+1} {location.name}</span>
+                        <span>{this.props.index+1}. {location.name}</span>
                         <div className="overlay"><span>Click and check the place on map</span></div>
                         <img src={location.icon} alt="icon"/>
                     </div>
