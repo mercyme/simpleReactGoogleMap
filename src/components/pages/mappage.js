@@ -63,7 +63,6 @@ class MapPage extends Component {
 
   focuslocation = (loc, index) => {
       this.setState({center: loc, index: index});
-      console.log(loc);
   }
 
   createMarker = (place) =>{
@@ -73,13 +72,6 @@ class MapPage extends Component {
         title: place.name,
         map: map
       });
-      // GoogleMap.maps.event.addListener(marker, 'click', function() {
-      //   infoWindow.close();
-      //   infoWindow = new GoogleMap.maps.InfoWindow();
-      //   infoWindow.setContent('<div><strong>' + marker.title + '</strong><br>' +
-      //          '</div>');
-      //   infoWindow.open(map, this);
-      // });
       markers.push(marker);
   }
 
