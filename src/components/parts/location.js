@@ -4,6 +4,7 @@ class Location extends Component {
 
     render() {
         let location = this.props.locationObj;
+        let address = location.formatted_address.split(',');
         return (
             <li className="location" onClick={() => this.props.focusLocation(location, this.props.index)}>
                 <div>
@@ -13,7 +14,10 @@ class Location extends Component {
                         <img src={location.icon} alt="icon"/>
                     </div>
                     <div className="location-info">
-                        <p>Address: {location.formatted_address}</p>
+                        <p><b>Street: </b>{address[0]}</p>
+                        <p><b>City: </b>{address[1]}</p>
+                        <p><b>State and Zip Code: </b>{address[2]}</p>
+                        <p><b>Country: </b>{address[3]}</p>
                     </div>
                     <div className="location-footer">
                         {location.types.length > 1 ? (<p>Location Types:</p>) : (<p>Location Type:</p>)}
