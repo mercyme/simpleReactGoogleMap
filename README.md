@@ -18,6 +18,9 @@ And run this to start the application
 ```
 npm run start
 ```
+## Features
+1. 
+
 
 ## Technology
 

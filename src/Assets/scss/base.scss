@@ -8,12 +8,21 @@ $darkGrey: #333;
 $red: #ff1755;
 $yellow: #f89f1b;
 $light-bg: #4caf50;
+$tablet-width: 768px;
+$desktop-width: 1024px;
+$desktopFontSize: 18px;
+$tabletFontSize: 16px;
+$mobileFontSize: 14px;
+
+
+
 /*
   Fonts: google open sans
   light 300
   regular 400
   bold 700
 */
+
 /* 
   Mixins
 */
@@ -33,16 +42,39 @@ $light-bg: #4caf50;
 	-moz-transition: $e;
 	transition: $e;
 }
+/*
+  Media Queries
+*/
+
+@mixin tablet {
+	@media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: #{$desktop-width}) {
+		@content;
+	}
+}
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-size: $mobileFontSize;
+
+	@include tablet {
+		font-size: $tabletFontSize;
+	}
+
+	@include desktop {
+		font-size: $desktopFontSize;
+	}
 }
 
 body {
 	font-family: 'Open Sans', sans-serif;
-	font-size: 16px;
 	color: $black;
 	font-weight: 400;
 	font-style: normal;
@@ -53,20 +85,31 @@ ul, li {
 }
 
 a {
-   text-decoration: none;
-   color: $white;
-   @include transition(.4s ease-in-out);
-   cursor: pointer;
+	text-decoration: none;
+	color: $white;
+	@include transition(.4s ease-in-out);
+	cursor: pointer;
 
-   &:hover{
-   	text-decoration: none;
-   	color: $yellow;
-   }
+	&:hover{
+		text-decoration: none;
+		color: $yellow;
+	}
 }
 
 .container{
-	width: 90%;
+	width: 95%;
 	margin: auto;
+
+	@include tablet {
+		width: 90%;
+		font-size: $tabletFontSize;
+	}
+
+	@include desktop {
+		width: 90%;
+		font-size: $desktopFontSize;
+	}
+
 }
 
 .center-parent{
