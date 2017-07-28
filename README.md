@@ -21,7 +21,9 @@ npm run start
 
 ## Features
 1. query box that can search for any locations as you type in
+![Alt text](/screenshots/home.png?raw=true "Home Page")
 2. responsive map, refined UI to give good user experience with locations
+![Alt text](/screenshots/locations.png?raw=true "searching locations")
 3. interactivity between location you searched and the map
 4. one page app with routes 
 
