@@ -18,9 +18,12 @@ And run this to start the application
 ```
 npm run start
 ```
-## Features
-1. 
 
+## Features
+1. query box that can search for any locations as you type in
+2. responsive map, refined UI to give good user experience with locations
+3. interactivity between location you searched and the map
+4. one page app with routes 
 
 ## Technology
 
