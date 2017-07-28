@@ -4,7 +4,7 @@ import LocationContainer from '../parts/locationContainer';
 
 let GoogleMap = window.google;
 let map, service, request, myLatLng, infoWindow, markers;
-let zenefits = new GoogleMap.maps.LatLng(37.785341, -122.395377);
+let sfc = new GoogleMap.maps.LatLng(37.785341, -122.395377);
 
 class MapPage extends Component {
   constructor(props){
@@ -17,7 +17,7 @@ class MapPage extends Component {
     };
   }
   componentDidMount(){
-    myLatLng = zenefits;
+    myLatLng = sfc;
     const mapOptions = {
       zoom: 15,
       center: myLatLng,
@@ -31,7 +31,7 @@ class MapPage extends Component {
     return nextState.center !== this.state.center;
   }
   componentDidUpdate(){
-    let center = this.state.center ? this.state.center.geometry.location : zenefits;
+    let center = this.state.center ? this.state.center.geometry.location : sfc;
     let locations = this.state.locations;
     map.setCenter(new GoogleMap.maps.LatLng(center.lat(),center.lng()));
     for(let i = 0;i <locations.length; i++){
