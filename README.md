@@ -1,9 +1,12 @@
 # React Google Maps Example
 
-I was given a challenge to create a web app that provides a query box and a search button and then calls the Places Library for Google Maps. Results should be formatted to give a good user experience.
+I created this little web app in order to learn react and google map API. It provides a query box and and then calls the Places Library for Google Maps. 
+Results are formatted to give a good user experience.
+
 The app includes:
   1. A map with location markers/pins
-  2. A list of locations (Some interactivity is expected between the two)
+  2. A list of locations, the first location gets centered by default
+  3. If the user clicks on any of the location, the map will be centered by the new location.
   
 ### Installing
 
@@ -29,11 +32,11 @@ npm run start
 
 ## Technology
 
-React,
+React (^15.6.1),
+React Router Dom (^4.1.2),
 Sass,
-Gulp,
+Gulp (^3.9.1),
 Google Map Web API
-
 
 ## Built With
 
